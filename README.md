@@ -1,2 +1,2 @@
 # qwick
-Repository for the new Qwick ecosystem for Terbium.
+A new ecosystem for the Terbium Shell.
