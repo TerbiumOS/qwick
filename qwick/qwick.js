@@ -76,6 +76,23 @@ async function qwick(args) {
 		case "help":
 			help(args._);
 			break;
+        case "update":
+            var version = (JSON.parse(await window.parent.Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"))).version;
+            var remoteVersion = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/version?ts=${Date.now()}`);
+            if (version != remoteVersion) {
+                displayOutput("Updating Qwick...");
+                const installerRaw = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/installer/installer.js?ts=${Date.now()}`);
+                const installerBody = await installerRaw.text();
+                const wrappedInstallerBody = `(async (tb, Filer, displayOutput, displayError) => {
+                  ${installerBody}
+                })`;
+                const installerFn = eval(wrappedInstallerBody);
+                await installerFn(terbium, window.parent.Filer, displayOutput, displayError);
+                displayOutput("Finished updating Qwick");
+            } else {
+                displayOutput("No new qwick version available");
+            }
+            createNewCommandInput();
 		default:
 			error(`qwick > unknown subcommand: ${args._[0]}`);
 			break;
