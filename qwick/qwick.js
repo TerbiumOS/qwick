@@ -81,7 +81,7 @@ async function qwick(args) {
         case "help":
             help(args._);
             break;
-        case "update":
+        case "update": {
             var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
             var version = Metafile.version;
             var remoteVersionRaw = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/version?ts=${Date.now()}`);
@@ -102,6 +102,7 @@ async function qwick(args) {
             }
             createNewCommandInput();
             break;
+        }
         default:
             error(`qwick > unknown subcommand: ${args._[0]}`);
             break;
