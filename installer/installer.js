@@ -1,8 +1,8 @@
 var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
-var filesRoot = "https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/qwick";
+var filesRoot = "https://terbiumos.github.io/qwick/qwick";
 var qwickRoot = Metafile.root;
 displayOutput("Searching for files to install...")
-var filetableRaw = await tb.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/installer/filetable.json?ts=${Date.now()}`);
+var filetableRaw = await tb.libcurl.fetch(`https://terbiumos.github.io/qwick/installer/filetable.json?ts=${Date.now()}`);
 var filetable = await filetableRaw.json();
 var filetableKeys = Object.keys(filetable);
 displayOutput("Using filetable.json for file mapping");
