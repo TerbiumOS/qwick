@@ -85,9 +85,7 @@ async function qwick(args) {
                 displayOutput("Updating Qwick...");
                 const installerRaw = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/installer/installer.js?ts=${Date.now()}`);
                 const installerBody = await installerRaw.text();
-                const wrappedInstallerBody = `(async (tb, Filer, displayOutput, displayError) => {
-                  ${installerBody}
-                })`;
+                const wrappedInstallerBody = `(async (tb, Filer, displayOutput, displayError) => {\n${installerBody}\n})`;
                 const installerFn = eval(wrappedInstallerBody);
                 await installerFn(terbium, Filer, displayOutput, displayError);
                 displayOutput("Writing update to Metafile");
