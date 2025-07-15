@@ -78,7 +78,8 @@ async function qwick(args) {
 			break;
         case "update":
             var version = (JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"))).version;
-            var remoteVersion = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/version?ts=${Date.now()}`);
+            var remoteVersionRaw = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/version?ts=${Date.now()}`);
+            var remoteVersion = await remoteVersionRaw.text();
             if (version != remoteVersion) {
                 displayOutput("Updating Qwick...");
                 const installerRaw = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/installer/installer.js?ts=${Date.now()}`);
