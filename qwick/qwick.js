@@ -77,7 +77,7 @@ async function qwick(args) {
 			help(args._);
 			break;
         case "update":
-            var version = (JSON.parse(await window.parent.Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"))).version;
+            var version = (JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"))).version;
             var remoteVersion = await terbium.libcurl.fetch(`https://raw.githubusercontent.com/TerbiumOS/qwick/refs/heads/main/version?ts=${Date.now()}`);
             if (version != remoteVersion) {
                 displayOutput("Updating Qwick...");
@@ -87,7 +87,7 @@ async function qwick(args) {
                   ${installerBody}
                 })`;
                 const installerFn = eval(wrappedInstallerBody);
-                await installerFn(terbium, window.parent.Filer, displayOutput, displayError);
+                await installerFn(terbium, Filer, displayOutput, displayError);
                 displayOutput("Finished updating Qwick");
             } else {
                 displayOutput("No new qwick version available");
