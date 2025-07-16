@@ -1,7 +1,7 @@
 var moduleCache = {};
 async function requireModule(id) {
     if (moduleCache[id]) return moduleCache[id];
-    const file = await Filer.fs.promises.readFile(`/system/qwick/deps/${id}.module.js`, 'utf8');
+    const file = await Filer.fs.promises.readFile(`/system/qwick/coredeps/${id}.module.js`, 'utf8');
     const mod = {};
     const wrapper = new Function('module', 'exports', file);
     wrapper(mod, mod.exports = {});
