@@ -1,4 +1,4 @@
 {
     "/qwick.js": "$ROOT/qwick.js",
-    "/coredeps/test.js": "$ROOT/coredeps/test.js"
+    "/coredeps/updater.js": "$ROOT/coredeps/updater.js"
 }
