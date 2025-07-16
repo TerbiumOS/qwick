@@ -23,7 +23,7 @@ var cmdData = {
 	}
 };
 async function qwick(args) {
-	(await requireModule("test")).test();
+	displayOutput((await requireModule("test")).test());
     function error(err) {
         displayError(`${err}\n`);
         createNewCommandInput();
