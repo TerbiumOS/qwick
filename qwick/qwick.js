@@ -1,5 +1,14 @@
+var moduleCache = {};
+async function requireModule(id) {
+    if (moduleCache[id]) return moduleCache[id];
+    const file = await Filer.fs.promises.readFile(`/system/qwick/deps/${id}.module.js`, 'utf8');
+    const mod = {};
+    const wrapper = new Function('module', 'exports', file);
+    wrapper(mod, mod.exports = {});
+    moduleCache[id] = mod.exports;
+    return mod.exports;
+}
 const ver = "1.0.1";
-
 var cmdData = {
     help: {
         desc: "Shows information about a given subcommand",
@@ -13,8 +22,8 @@ var cmdData = {
 		usage: "qwick update"
 	}
 };
-
 async function qwick(args) {
+	(await requireModule("test")).test();
     function error(err) {
         displayError(`${err}\n`);
         createNewCommandInput();
@@ -76,7 +85,6 @@ async function qwick(args) {
         displayOutput(`Qwick v${ver}`);
         createNewCommandInput();
     }
-
     switch (args._[0]) {
         case undefined:
         case null:
