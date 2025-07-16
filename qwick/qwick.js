@@ -94,7 +94,7 @@ async function qwick(args) {
             break;
         case "update": {
             let updater = await requireModule("updater");
-            updater.updater(terbium, Filer, displayOutput, displayError);
+            await updater.updater(terbium, Filer, displayOutput, displayError);
             createNewCommandInput();
             break;
         }
