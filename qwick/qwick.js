@@ -1,4 +1,4 @@
-const ver = "1.0.0";
+const ver = "1.0.1";
 
 var cmdData = {
     help: {
@@ -7,7 +7,11 @@ var cmdData = {
         args: {
             subcmd: "The subcommand to look up. I.e. tb help system version",
         },
-    }
+    },
+	update: {
+		desc: "Updates qwick",
+		usage: "qwick update"
+	}
 };
 
 async function qwick(args) {
@@ -82,7 +86,7 @@ async function qwick(args) {
             help(args._);
             break;
         case "update": {
-            var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
+			var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
             var version = Metafile.version;
             var remoteVersionRaw = await terbium.libcurl.fetch(`https://terbiumos.github.io/qwick/version?ts=${Date.now()}`);
             var remoteVersion = (await remoteVersionRaw.text()).trim();
