@@ -98,6 +98,14 @@ async function qwick(args) {
             createNewCommandInput();
             break;
         }
+        case "repo": {
+            var repo = await requireModule("repos");
+            switch(args._[1]) {
+                case "list": {
+                    
+                }
+            }
+        }
         default:
             error(`qwick > unknown subcommand: ${args._[0]}`);
             break;
