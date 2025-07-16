@@ -86,7 +86,7 @@ async function qwick(args) {
             help(args._);
             break;
         case "update": {
-			var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
+            var Metafile = JSON.parse(await Filer.fs.promises.readFile("/system/qwick/Metafile", "utf8"));
             var version = Metafile.version;
             var remoteVersionRaw = await terbium.libcurl.fetch(`https://terbiumos.github.io/qwick/version?ts=${Date.now()}`);
             var remoteVersion = (await remoteVersionRaw.text()).trim();
