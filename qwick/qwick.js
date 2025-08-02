@@ -14,12 +14,15 @@ var cmdData = {
         desc: "Shows information about a given subcommand",
         usage: "qwick help <subcmd> ...",
         args: {
-            subcmd: "The subcommand to look up. I.e. tb help system version",
+            subcmd: "The subcommand to look up. I.e. qwick help update",
         },
     },
 	update: {
 		desc: "Updates qwick",
-		usage: "qwick update"
+		usage: "qwick update",
+        args: {
+            "-f/--force": "Forces qwick to update, even if there is no newer version available"
+        }
 	}
 };
 async function qwick(args) {
@@ -94,7 +97,11 @@ async function qwick(args) {
             break;
         case "update": {
             let updater = await requireModule("updater");
-            await updater.updater(terbium, Filer, displayOutput, displayError);
+            if (args.f || args.force) {
+                
+            } else {
+                await updater.update(terbium, Filer, displayOutput, displayError);
+            }
             createNewCommandInput();
             break;
         }
